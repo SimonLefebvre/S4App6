@@ -69,7 +69,7 @@ def MyIIRFilter(N, PB_Gain, SB_Gain, wn, fe, Type, printName, printOption):
         print("b13")
         print(sos13)
         with open("IIRcoeffs", "w") as fd:
-            fd.write(f"int32_t IIRCoeffs[4] = {{\n")
+            fd.write(f"int32_t IIRCoeffs[N_SOS_SECTIONS][6] = {{\n")
             for cc in range(4):
                 fd.write(f"{{ ")
                 for c in range(6):
