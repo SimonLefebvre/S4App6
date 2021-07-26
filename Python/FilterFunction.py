@@ -7,7 +7,16 @@ from scipy import signal
 def MyFIRFilter(N, fe, fc, name, printName, printOption):
 
     fir_h: np.ndarray = signal.firwin(numtaps=N, cutoff=fc, pass_zero=name, window="blackman", fs=fe)
+    fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=10000, fs=fe)
     fir_h_dft_tf: np.ndarray = np.abs(np.fft.fft(fir_h))
+    fir_H = np.append(fir_h_dft_tf[int(N / 2)::], fir_h_dft_tf[0:int(N / 2)])
+
+    if (printOption > 3):
+        print("fir_freq_fz")
+        print(fir_freq_fz)
+        print("fir_h_dft_fz")
+        print(fir_h_dft_fz)
+        #print(fir_h_dft_tf)
 
     if(printOption > 2):
         plt.figure('N = 256' + printName)
@@ -27,11 +36,12 @@ def MyFIRFilter(N, fe, fc, name, printName, printOption):
         plt.figure('Normalized FREQ' + printName)
         plt.subplot(2,1,1)
         nn = np.arange(-N/2,N/2,1)
-        fir_H = np.append(fir_h_dft_tf[int(N/2)::],fir_h_dft_tf[0:int(N/2)])
-        plt.plot(nn,fir_H)
+
+        plt.plot(nn,20*np.log10(np.abs(fir_H)))
         plt.subplot(2,1,2)
         nHz = np.arange(-fe/2,fe/2,fe/N)
-        plt.plot(nHz,fir_H)
+        plt.plot(nHz,20*np.log10(np.abs(fir_H)))
+    return fir_H
 
 
 def MyIIRFilter(N, PB_Gain, SB_Gain, wn, fe, Type, printName, printOption):
