@@ -3,23 +3,29 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 
-
 def MyFIRFilter(N, fe, fc, name, printName, printOption):
 
-    fir_h: np.ndarray = signal.firwin(numtaps=N, cutoff=fc, pass_zero=name, window="blackman", fs=fe)
-    fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=10000, fs=fe)
+    fir_h: np.ndarray = signal.firwin(numtaps=N, cutoff=fc, pass_zero=name, window="blackman", fs=fe)#blackman
+    fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1,whole = True, worN=1024, fs=fe)
     fir_h_dft_tf: np.ndarray = np.abs(np.fft.fft(fir_h))
     fir_H = np.append(fir_h_dft_tf[int(N / 2)::], fir_h_dft_tf[0:int(N / 2)])
 
     if (printOption > 3):
-        print("fir_freq_fz")
-        print(fir_freq_fz)
-        print("fir_h_dft_fz")
+        plt.figure('Freq_FZ' + printName)
+        plt.plot(fir_freq_fz,np.abs(fir_h_dft_fz))
+        print('len')
+        print(len(fir_h_dft_fz))
         print(fir_h_dft_fz)
-        #print(fir_h_dft_tf)
+        with open(printName+"file.h", "w") as fd:
+            fd.write(f"int32c H[{len(fir_h_dft_fz)}] = {{\n")
+            for c in fir_h_dft_fz:
+                real = np.round(np.power(2,13) * float(c.real))
+                imag = np.round(np.power(2,13) * float(c.imag))
+                fd.write(f"{{{int(real)},{int(imag)}}},\n")
+            fd.write("};\n")
 
     if(printOption > 2):
-        plt.figure('N = 256' + printName)
+        plt.figure('N = 25X' + printName)
         plt.subplot(2,1,1)
         plt.plot(fir_h)
         plt.subplot(2,1,2)
