@@ -121,6 +121,7 @@ int main(void) {
 
     // Calculate spectral resolution, use (double) type casting for parameters
     // *** POINT A1: spectralResolution =...
+    spectralResolution = (double)Fe / (double)FFT_LEN;
 
     // MX3 peripherals hardware initializations
     BTN_Init();
@@ -231,10 +232,21 @@ int main(void) {
                 }
                 
                 // *** POINT A2: calculate frequency spectrum components X[k] with PIC32 DSP Library FFT function call
-
+                
+                mips_fft32(outFFT, inFFT, twiddles, Scratch, LOG2FFTLEN);
+      
                 // *** POINT A3: Calculate power spectrum 10log(|X[k]|^2) in dB,
                 //               add "1" to log() operand to avoid division by zero,
                 //               store in "debugBuffer1".
+                
+                double re, im;
+                
+                for(n = 0; n < FFT_LEN; n++)
+                {
+                    re = outFFT[n].re;
+                    im = outFFT[n].im;
+                    debugBuffer1[n] = 10 * log((re * re) + (im * im) + 1);
+                }
 
                 // Find index of frequency with highest power (positive frequency spectrum only)
                 maxVal = -1;
@@ -247,6 +259,8 @@ int main(void) {
                 
                 // Calculate value in Hz of frequency with highest power 
                 // *** POINT A4: maxAmplFreq = ...
+                
+                maxAmplFreq = spectralResolution * maxN;
 
                 // Show frequency with highest power on 7 segment display, max-out at 4 digits (9999)
                 numberInto4DigitString(maxAmplFreq, freqDigits);
