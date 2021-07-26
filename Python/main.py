@@ -9,7 +9,7 @@ H_BP1 = ff.MyFIRFilter(255, fe, [500, 1500], "bandpass", "BandPass#1", 0)
 H_BP2 = ff.MyFIRFilter(255, fe, [1500, 2500], "bandpass", "BandPass#2", 0)
 H_BP3 = ff.MyFIRFilter(255, fe, [2500, 4500], "bandpass", "BandPass#3", 0)
 H_HP = ff.MyFIRFilter(255, fe, 4490, "highpass", "highpass", 0)
-ff.MyIIRFilter(N=4, PB_Gain=1, SB_Gain=70, wn=[950, 1050], fe=20000, Type="bandstop", printName="bandstop", printOption=0)
+ff.MyIIRFilter(N=4, PB_Gain=1, SB_Gain=70, wn=[950, 1050], fe=20000, Type="bandstop", printName="bandstop", printOption=6)
 
 # FIR filters .h COEFICIENTS
 with open("FIR.h", "w") as fd:
