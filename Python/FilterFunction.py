@@ -47,7 +47,8 @@ def MyFIRFilter(N, fe, fc, name, printName, printOption):
         plt.subplot(2,1,2)
         nHz = np.arange(-fe/2,fe/2,fe/N)
         plt.plot(nHz,20*np.log10(np.abs(fir_H)))
-    return fir_H
+
+    return fir_h_dft_fz
 
 
 def MyIIRFilter(N, PB_Gain, SB_Gain, wn, fe, Type, printName, printOption):
