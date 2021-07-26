@@ -301,16 +301,52 @@ int main(void) {
                 //                of the built-in division by N in the PIC32 DSP Library implementation
                 //                of the FFT algorithm (See DS51685E, p.118), else roundoff error 
                 //                decreases resolution of X[k] result.
+                
+                for (n = 0; n < H_LEN; n++) {
+                    inFFT[n].re = currentInBuffer[n + 2*H_LEN] * FFT_LEN;
+                    inFFT[n].im = 0;
+                }
+                for (; n < FFT_LEN; n++) {
+                    inFFT[n].re = previousInBuffer[n - H_LEN] * FFT_LEN;
+                    inFFT[n].im = 0;
+                }
+                
+                for (; n < FFT_LEN; n++) {
+                    inFFT[n].re = 0;
+                    inFFT[n].im = 0;
+                }
+                
+                for (n = 0; n < FFT_LEN; n++)
+                {
+                    debugBuffer2[n] = inFFT[n].re;
+                }
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
-
+                
+                mips_fft32(outFFT, inFFT, twiddles, Scratch, LOG2FFTLEN);
+                
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*
                 // (instead of Y=HX, in preparation for inverse FFT using forward FFT library function call)
+                
+                int32c Y[FFT_LEN];
+                    
+                for (n = 0; n < FFT_LEN; n++)
+                {
+                    Y[n].im = (outFFT[n].re * Htot[n].re) - (outFFT[n].im * Htot[n].im);
+                    Y[n].re = ((outFFT[n].im * Htot[n].re) + (outFFT[n].re * Htot[n].im));
+                }
 
                 // *** POINT B3: Inverse FFT by forward FFT library function call, no need to divide by N
+                
+                mips_fft32(outFFT, Y, twiddles, Scratch, LOG2FFTLEN);
 
                 // *** POINT B4: Extract real part of the inverse FFT result and remove H QX.Y scaling,
 				// discard first block as per the "Overlap-and-save" method.
+                
+                for(n = 0; n < SIG_LEN; n++)
+                {
+                    currentOutBuffer[n] = (outFFT[n+H_LEN].im) >> 13;
+                }
 
                 // If required, update LCD display with SW7-SW3 switch states
                 if (switchStateChange) {

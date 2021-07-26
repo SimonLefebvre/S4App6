@@ -79,7 +79,7 @@ plt.legend()
 
 #hanning file
 
-x = np.hanning(1024)
+x = np.hanning(768)
 x = np.round(x * np.power(2, 13))
 plt.figure("hanning")
 plt.plot(x)
@@ -87,7 +87,7 @@ plt.plot(x)
 
 
 with open("hanning.h", "w") as fd:
-    fd.write(f"int32c window[{1024}] = {{\n")
+    fd.write(f"int32c window[{768}] = {{\n")
     for c in x:
         fd.write(f"{int(c)},\n")
     fd.write("};\n")
