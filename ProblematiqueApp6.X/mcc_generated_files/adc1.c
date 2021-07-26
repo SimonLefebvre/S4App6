@@ -61,8 +61,8 @@
 
 void ADC1_Initialize (void)
 {
-    // ASAM enabled; DONE disabled; CLRASAM disabled; FORM Integer 32 bit; SAMP disabled; SSRC TMR3; SIDL disabled; ON enabled; 
-   AD1CON1 = 0x8444;
+    // ASAM enabled; DONE disabled; CLRASAM disabled; FORM Signed Integer 32-bit; SAMP disabled; SSRC TMR3; SIDL disabled; ON enabled; 
+   AD1CON1 = 0x8544;
 
     // CSCNA enabled; ALTS disabled; BUFM disabled; SMPI 1; OFFCAL disabled; VCFG AVDD/AVSS; 
    AD1CON2 = 0x400;
@@ -122,7 +122,7 @@ void ADC1_ChannelSelect( ADC1_CHANNEL channel )
 
 void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
 {
-    int x, y, nSOS;
+   int x, y, nSOS;
     
     // Read A/D input (ALWAYS, otherwise program hangs)
     x = ADC1BUF0;
@@ -176,6 +176,7 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
     // clear ADC interrupt flag
     IFS0CLR= 1 << _IFS0_AD1IF_POSITION;
 }
+
 
 /**
   End of File
