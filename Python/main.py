@@ -92,4 +92,29 @@ with open("hanning.h", "w") as fd:
         fd.write(f"{int(c)},\n")
     fd.write("};\n")
 
+#Vérification A2 et A3
+n = np.arange(0,256*3)
+t = n / 20000
+x = 500 * np.sin(2000*np.pi*2*t) * 8192/4
+
+X = np.fft.fft(x, 1024)
+plt.figure("A2 & A3")
+plt.plot(10 * np.log10((X * X)+1))
+plt.xlabel("n")
+plt.ylabel("Amplitude (dB)")
+plt.title("X[n]")
+plt.tight_layout()
+
+n = np.arange(0,256*3)
+t = n / 20000
+x = 500 * np.sin(2000*np.pi*2*t) * 8192/4
+x = x * np.hanning(256*3)
+
+X = np.fft.fft(x, 1024)
+plt.figure("A2 & A3 hann")
+plt.plot(10 * np.log10((X * X)+1))
+plt.xlabel("n")
+plt.ylabel("Amplitude (dB)")
+plt.title("X[n] avec fenêtrage")
+plt.tight_layout()
 plt.show()
