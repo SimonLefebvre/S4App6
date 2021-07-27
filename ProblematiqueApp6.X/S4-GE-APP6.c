@@ -311,22 +311,14 @@ int main(void) {
                     inFFT[n].im = 0;
                 }     
                 
-                for (n = 0; n < FFT_LEN; n++)
-                {
-                    debugBuffer2[n] = inFFT[n].re;
-                }
+                //for (n = 0; n < FFT_LEN; n++)
+                //{
+                 //   debugBuffer2[n] = inFFT[n].re;
+                //}
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
                 
                 mips_fft32(outFFT, inFFT, twiddles, Scratch, LOG2FFTLEN);
-                
-                double re, im;
-                for(n = 0; n < FFT_LEN; n++)
-                {
-                    re = outFFT[n].re;
-                    im = outFFT[n].im;
-                    debugBuffer1[n] = 10 * log((re * re) + (im * im) + 1);
-                }
                 
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*
                 // (instead of Y=HX, in preparation for inverse FFT using forward FFT library function call)
