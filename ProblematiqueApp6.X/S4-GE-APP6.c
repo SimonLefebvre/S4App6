@@ -223,7 +223,7 @@ int main(void) {
                 //      loss of resolution with an arithmetic shift by the difference of bits between
                 //      the two: ">> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN"
                 for (n = 0; n < SIG_LEN; n++) {
-                    inFFT[n].re = (previousInBuffer[n] * 8192) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (previousInBuffer[n] * window[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
                     inFFT[n].im = 0;
                 }
                 for (; n < FFT_LEN; n++) {
@@ -313,12 +313,20 @@ int main(void) {
                 
                 for (n = 0; n < FFT_LEN; n++)
                 {
-                    //debugBuffer2[n] = inFFT[n].re;
+                    debugBuffer2[n] = inFFT[n].re;
                 }
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
                 
                 mips_fft32(outFFT, inFFT, twiddles, Scratch, LOG2FFTLEN);
+                
+                double re, im;
+                for(n = 0; n < FFT_LEN; n++)
+                {
+                    re = outFFT[n].re;
+                    im = outFFT[n].im;
+                    debugBuffer1[n] = 10 * log((re * re) + (im * im) + 1);
+                }
                 
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*
                 // (instead of Y=HX, in preparation for inverse FFT using forward FFT library function call)
