@@ -125,7 +125,7 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
    int x, y, nSOS;
     
     // Read A/D input (ALWAYS, otherwise program hangs)
-    x = ADC1BUF0;
+    x = ADC1BUF0;//Q15
 
     // Copy the input sample to the current input buffer
     currentInBuffer[bufferCount] = x;
@@ -135,19 +135,15 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
         y = x;
          for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) {
             // *** POINT C1
-            
-			// y[n] = 
-			
-			// v[n] = 
-			
-			// u[n] = 
-            
+            y = (IIRCoeffs[nSOS][0]*x + IIRv[nSOS])>>13;//Q2.13 * Q0.15 + Q2.28
+            IIRv[nSOS] = IIRCoeffs[nSOS][1]*x - IIRCoeffs[nSOS][4]*y + IIRu[nSOS];//Q2.13*Q0.15 - Q2.13*Q0.15 + Q2.28
+            IIRu[nSOS] = IIRCoeffs[nSOS][2]*x - IIRCoeffs[nSOS][5]*y;
             // Update the input for the next SOS section
             x = y;
         }
 
         // Copy the resulting filtered sample to the current output buffer
-        currentOutBuffer[bufferCount] = y;
+        currentOutBuffer[bufferCount] = y;//Q15
     }
 
     // Write next output sample from the current output buffer to the PWM 
