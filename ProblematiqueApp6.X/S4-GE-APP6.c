@@ -223,7 +223,7 @@ int main(void) {
                 //      loss of resolution with an arithmetic shift by the difference of bits between
                 //      the two: ">> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN"
                 for (n = 0; n < SIG_LEN; n++) {
-                    inFFT[n].re = (previousInBuffer[n] * window[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (previousInBuffer[n] * 8192) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
                     inFFT[n].im = 0;
                 }
                 for (; n < FFT_LEN; n++) {
@@ -303,22 +303,17 @@ int main(void) {
                 //                decreases resolution of X[k] result.
                 
                 for (n = 0; n < H_LEN; n++) {
-                    inFFT[n].re = currentInBuffer[n + 2*H_LEN] * FFT_LEN;
+                    inFFT[n].re = currentInBuffer[n + (2*H_LEN)] * FFT_LEN;
                     inFFT[n].im = 0;
                 }
                 for (; n < FFT_LEN; n++) {
                     inFFT[n].re = previousInBuffer[n - H_LEN] * FFT_LEN;
                     inFFT[n].im = 0;
-                }
-                
-                for (; n < FFT_LEN; n++) {
-                    inFFT[n].re = 0;
-                    inFFT[n].im = 0;
-                }
+                }     
                 
                 for (n = 0; n < FFT_LEN; n++)
                 {
-                    debugBuffer2[n] = inFFT[n].re;
+                    //debugBuffer2[n] = inFFT[n].re;
                 }
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call

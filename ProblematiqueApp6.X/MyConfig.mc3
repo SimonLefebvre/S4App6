@@ -2947,7 +2947,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB5"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="trisUserSetRB2"/>
@@ -3343,7 +3343,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSELB"/>
-         <value>65500</value>
+         <value>65532</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSB8" alias="digital"/>
@@ -3631,7 +3631,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RE9"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADC1" registerAlias="ADCHS" settingAlias="CH0NA"/>
@@ -3719,7 +3719,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISB"/>
-         <value>65535</value>
+         <value>65503</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="DEVCFG0" settingAlias="PWP" alias="PWP248K"/>
@@ -3819,7 +3819,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISE"/>
-         <value>1023</value>
+         <value>511</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="LATG" settingAlias="LATG2" alias="set"/>
@@ -4110,12 +4110,12 @@
          <value>0</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="OC1" registerAlias="OCCON" settingAlias="ON" alias="disabled"/>
-         <value>0</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR2" registerAlias="TI" settingAlias="enable"/>
          <value>disabled</value>
+      </entry>
+      <entry>
+         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="OC1" registerAlias="OCCON" settingAlias="ON" alias="disabled"/>
+         <value>0</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="CNPUG" settingAlias="CNPUG2" alias="disabled"/>
@@ -7055,7 +7055,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSB5"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="CNENF" settingAlias="CNIEF2" alias="enabled"/>
@@ -12443,7 +12443,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISE" settingAlias="TRISE9"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="TRISE" settingAlias="TRISE0" alias="input"/>
@@ -12567,7 +12567,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB5"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="CNENB" settingAlias="CNIEB9"/>
@@ -13332,24 +13332,24 @@
    </tokenMap>
    <generatedFileHashHistoryMap class="java.util.HashMap">
       <entry>
-         <file>mcc_generated_files\mcc.h</file>
-         <hash>4c9a6805835c45f5083566900884f04b1bc55566a41fa0acda71285b571f96e8</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\interrupt_manager.h</file>
          <hash>361952e7f4bb04ff20f7aba3483f068932eb428140931c77e55c9b71e31b69dd</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\mcc.h</file>
+         <hash>ced14932e1dbf4c72cfda0b3ba39cfdd7fbc7be75d34f7dac1957050ffc36c1e</hash>
       </entry>
       <entry>
          <file>main.c</file>
          <hash>11aa152f306e93082538179a262a414723cb9b6f65bea3daf8a518e222cac871</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\tmr3.h</file>
-         <hash>97005f48a1c927759610ecf50080642c6697201493c70ee95815ac4aee9156aa</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\adc1.c</file>
          <hash>4602a9e9f5a1792c99b6f1c9eb4671eafc0425edea50a23444f6e4976e0bccb8</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\tmr3.h</file>
+         <hash>97005f48a1c927759610ecf50080642c6697201493c70ee95815ac4aee9156aa</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr2.h</file>
@@ -13373,7 +13373,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>fa475908da1ede691a7dd499383fb129ccecca9a1327a16145771020e7cee462</hash>
+         <hash>1f69d469f45c66277fa61828dc9cc7fbab87d93123db717d317bdaafffbecc87</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\oc1.c</file>
@@ -13384,12 +13384,12 @@
          <hash>d717a4ef47d215de0395c0e451a0ce3e1fbb6fac37a9c1cf7a50b82b9cbeb35b</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\mcc.c</file>
-         <hash>75b83c1043eab0081a1054e76963d16ab1246a2e2eba0d1e676fc2957f29eee0</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\interrupt_manager.c</file>
          <hash>1e0e9a82a6f672712f8474dbd8b179516ccd820209be7bd262a4172c09fa090c</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\mcc.c</file>
+         <hash>75b83c1043eab0081a1054e76963d16ab1246a2e2eba0d1e676fc2957f29eee0</hash>
       </entry>
    </generatedFileHashHistoryMap>
    <mc3libFileHashHistoryMap class="java.util.HashMap"/>
