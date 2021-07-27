@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 import FilterFunction as ff
+import addcopyfighandler as cpy
+
+plt.rcParams['savefig.format'] = 'svg'
 
 fe = 20000
 H_LP = ff.MyFIRFilter(256, fe, 500, "lowpass", "LowPass", 0)

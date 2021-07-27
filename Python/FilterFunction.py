@@ -81,7 +81,7 @@ def MyIIRFilter(N, PB_Gain, SB_Gain, wn, fe, Type, printName, printOption):
 
 
     if (printOption>0):
-        plt.figure()
+        plt.figure("IIR FILTER")
         plt.semilogx(w, 20 * np.log10(np.abs(h_dft)),label="Normal Floats")
         plt.semilogx(w13, 20 * np.log10(np.abs(h_dft13)), label="Q2.13")
         plt.semilogx(w5, 20 * np.log10(np.abs(h_dft5)), label="Q2.5")
